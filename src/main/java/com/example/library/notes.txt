@@ -1,1 +1,19 @@
 difference between @Component, @Service, and @Repository
+
+@Component
+for general purpose like here we used this for validation
+
+@Service
+for business logic
+
+@Repository
+for Database Connection
+
+
+Today:
+=> learn Spring Basics and Dependency Injection and implemented
+Tomorrow:
+=> REST API
+Impediments:    
+=> NONE
+Repository =>

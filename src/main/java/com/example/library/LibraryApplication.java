@@ -14,13 +14,13 @@ public class LibraryApplication {
 
 		SpringApplication.run(LibraryApplication.class, args);
 	}
-@Bean
-		CommandLineRunner run(BookService bs){
-			return args->{
-				Book book = new Book(1,"x","y",300);
-				bs.addBook(book);
-			};
-		}
+//@Bean
+//		CommandLineRunner run(BookService bs){
+//			return x->{
+//				Book book = new Book(1,"x","y",300);
+//				bs.addBook(book);
+//			};
+//		}
 
 
 }
