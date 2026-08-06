@@ -1,5 +1,9 @@
 package com.example.library;
-
+import com.example.library.model.*;
+import com.example.library.component.*;
+import com.example.library.service.*;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,5 +14,13 @@ public class LibraryApplication {
 
 		SpringApplication.run(LibraryApplication.class, args);
 	}
+@Bean
+		CommandLineRunner run(BookService bs){
+			return args->{
+				Book book = new Book(1,"x","y",300);
+				bs.addBook(book);
+			};
+		}
+
 
 }

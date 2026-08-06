@@ -11,6 +11,9 @@ public class Book {
         this.writer = writer;
         this.price = price;
     }
+
+
+
     public int getId(){
         return id;
     }
