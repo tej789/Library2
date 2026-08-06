@@ -10,10 +10,3 @@ for business logic
 for Database Connection
 
 
-Today:
-=> learn Spring Basics and Dependency Injection and implemented
-Tomorrow:
-=> REST API
-Impediments:    
-=> NONE
-Repository =>
