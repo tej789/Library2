@@ -1,61 +1,68 @@
 package com.example.library.service;
 
-import org.springframework.stereotype.Service;
-import com.example.library.component.*;
+import com.example.library.component.Validation;
 import com.example.library.model.Book;
+import com.example.library.repository.BookRepository;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
 
-    private final WriterService ws;
-    private final Validation v;
+    private final BookRepository br;
+ private final Validation v;
 
-    private final List<Book> books= new ArrayList<>();
+   public BookService(BookRepository br, Validation v){
+       this.br = br;
+       this.v = v;
+   }
+    public Book addBook(Book book){
+       if(v.check(book)) return      br.save(book);
 
-    public BookService(WriterService ws,Validation v) {
-        this.ws = ws;
-        this.v = v;
-    }
-        public Boolean AddBook(Book book){
-
-            if(!v.check(book)){
-             return false;
-            }else{
-                books.add(book);
-                return true;
-            }
-
+       return null;
     }
 
     public List<Book> getBooks(){
-        return books;
+      return br.findAll();
     }
 
-    public boolean update(int id,Book book)
-    {
-        if(!v.check(book)){
-            return false;
+    public Book update(int id, Book newBook) {
+
+        Optional<Book> optionalBook = br.findById(id);
+
+        if (optionalBook.isPresent()) {
+            Book book = optionalBook.get();
+
+            book.setTitle(newBook.getTitle());
+            book.setWriter(newBook.getWriter());
+            book.setPrice(newBook.getPrice());
+
+            return br.save(book);
         }
-        for(int i =0;i<books.size();i++)
-        {
-          if(books.get(i).getId() == id){
-              books.set(i,book);
-              return true;
-          }
-        }
-        return false;
+
+        return null;
     }
+
 
     public Boolean delete(int id){
-        for(int i = 0;i<books.size();i++){
-            if(books.get(i).getId()==id){
-                books.remove(i);
-                return true;
-            }
-        }
-        return false;
-    }
+if(br.existsById(id)){
+    br.deleteById(id);
+    return true;
 }
+return false;
+    }
+
+
+    public List<Book> getBooksByTitle(String title) {
+        return br.findByTitle(title);
+    }
+
+    public List<Book> getBooksByPrice(double price) {
+        return br.findByPrice(price);
+    }
+
+    public List<Book> getBooksByWriter(String name) {
+        return br.findByWriter_Name(name);
+    }}

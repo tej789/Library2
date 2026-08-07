@@ -1,56 +1,62 @@
 package com.example.library.controller;
 
-import com.example.library.service.*;
-import com.example.library.component.*;
-import com.example.library.model.*;
-import com.example.library.controller.*;
+
+import com.example.library.model.Book;
+import com.example.library.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
 @RestController
 public class BookController {
-private final BookService bs;
 
-public BookController(BookService bs){
-    this.bs = bs;
-}
+    private final BookService bs;
 
-@PostMapping("/books")
-    public ResponseEntity<String> addBook(@RequestBody Book book){
-    if(bs.AddBook(book)){
-        return new ResponseEntity<>("Book ADded", HttpStatus.CREATED);
+    public BookController(BookService bs) {
+        this.bs = bs;
     }
-    return new ResponseEntity<>("Invalid Book",HttpStatus.BAD_REQUEST);
-}
 
-@GetMapping("/books")
-    public ResponseEntity<List<Book>> getBooks(){
-    return new ResponseEntity<>(bs.getBooks(),HttpStatus.OK);
-}
+    @PostMapping("/book")
+    public ResponseEntity<?> addBook(@RequestBody Book book) {
 
-@PutMapping("/books/{id}")
-    public ResponseEntity<String> update(@PathVariable int id ,@RequestBody Book book){
-    if(bs.update(id,book)){
-        return new ResponseEntity<>("Updated",HttpStatus.OK);
-
+        Book x =bs.addBook(book);
+        if(x==null){
+            return new ResponseEntity<>("Invalid Book",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(bs.addBook(book), HttpStatus.CREATED);
     }
-    return new ResponseEntity<>("Book Not found",HttpStatus.BAD_REQUEST);
-}
 
- @DeleteMapping("/books/{id}")
-  public ResponseEntity<String> delete(@PathVariable int id){
-    if(bs.delete(id)){
-        return new ResponseEntity<>("deleted Successfully",HttpStatus.OK);
+    @GetMapping("/book")
+    public ResponseEntity<List<Book>> getBooks() {
+        return new ResponseEntity<>(bs.getBooks(), HttpStatus.OK);
     }
-    return new ResponseEntity<>("Book Not Found",HttpStatus.BAD_REQUEST);
- }
 
+    @PutMapping("book/{id}")
+    public ResponseEntity<?> updateBook(@PathVariable int id,
+                                        @RequestBody Book book) {
+
+        Book updatedBook = bs.update(id, book);
+
+        if (updatedBook != null) {
+            return new ResponseEntity<>(updatedBook, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("Book Not Found", HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping("book/{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable int id) {
+
+        if (bs.delete(id)) {
+            return new ResponseEntity<>("Book Deleted", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("Book Not Found", HttpStatus.BAD_REQUEST);
+    }
+    @GetMapping("/book/title/{title}")
+    public List<Book> getByTitle(@PathVariable String title) {
+        return bs.getBooksByTitle(title);
+    }
 }
