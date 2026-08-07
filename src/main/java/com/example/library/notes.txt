@@ -9,9 +9,3 @@ for business logic
 @Repository
 for Database Connection
 
-Today:
-=> learned REST API and JPA and implemented REST API
-Tomorrow:
-=> JPA implementation
-Impediments:
-=> Cascade and fetch type
