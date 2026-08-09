@@ -51,10 +51,7 @@ public class Writer {
 
     @Override
     public String toString() {
-        return "Writer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "Writer{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 
 }
