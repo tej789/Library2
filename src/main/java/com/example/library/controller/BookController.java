@@ -55,8 +55,19 @@ public class BookController {
 
         return new ResponseEntity<>("Book Not Found", HttpStatus.BAD_REQUEST);
     }
+
     @GetMapping("/book/title/{title}")
     public List<Book> getByTitle(@PathVariable String title) {
         return bs.getBooksByTitle(title);
+    }
+
+    @GetMapping("/book/price/{price}")
+    public List<Book> getByPrice(@PathVariable Double price) {
+        return bs.getBooksByPrice(price);
+    }
+
+    @GetMapping("/book/writer/{name}")
+    public List<Book> getByWriter(@PathVariable String name) {
+        return bs.getBooksByWriter(name);
     }
 }

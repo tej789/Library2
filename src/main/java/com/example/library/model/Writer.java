@@ -1,5 +1,6 @@
 package com.example.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,11 +16,10 @@ public class Writer {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
+    @JsonIgnore
     private List<Book> books;
 
-    public Writer(){
-
-    }
+    public Writer(){}
 
     public Writer(int id,String name){
         this.id = id;
