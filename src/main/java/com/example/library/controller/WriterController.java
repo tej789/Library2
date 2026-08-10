@@ -35,4 +35,10 @@ public class WriterController {
         return new ResponseEntity<>(w,HttpStatus.OK);
     }
 
+    @PostMapping("writer/addWriterAndBook")
+    public String addWriterBook(){
+        ws.addWriterAndBook();
+        return "Saved";
+    }
+
 }

@@ -3,10 +3,11 @@ package com.example.library.controller;
 
 import com.example.library.model.Book;
 import com.example.library.service.BookService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @RestController
@@ -28,9 +29,14 @@ public class BookController {
         return new ResponseEntity<>(bs.addBook(book), HttpStatus.CREATED);
     }
 
+//    @GetMapping("/book")
+//    public ResponseEntity<List<Book>> getBooks() {
+//        return new ResponseEntity<>(bs.getBooks(), HttpStatus.OK);
+//    }
+
     @GetMapping("/book")
-    public ResponseEntity<List<Book>> getBooks() {
-        return new ResponseEntity<>(bs.getBooks(), HttpStatus.OK);
+    public Page<Book> getBooks(Pageable pageable) {
+        return bs.getBooks(pageable);
     }
 
     @PutMapping("book/{id}")
@@ -56,6 +62,11 @@ public class BookController {
         return new ResponseEntity<>("Book Not Found", HttpStatus.BAD_REQUEST);
     }
 
+    @GetMapping("/book/priceGreaterThan/{price}")
+    public List<Book> getBookGT(@PathVariable Double price)
+    {
+        return bs.getBooksGreaterThan(price);
+    }
     @GetMapping("/book/title/{title}")
     public List<Book> getByTitle(@PathVariable String title) {
         return bs.getBooksByTitle(title);

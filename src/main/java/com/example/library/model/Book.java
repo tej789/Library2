@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 public class Book {
     @Id
     private int id;
+
+    @Column(nullable = false)
     private String title;
 
     @ManyToOne(fetch = FetchType.EAGER)

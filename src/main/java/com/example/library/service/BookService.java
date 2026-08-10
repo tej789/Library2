@@ -3,8 +3,9 @@ package com.example.library.service;
 import com.example.library.component.Validation;
 import com.example.library.model.Book;
 import com.example.library.repository.BookRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +25,12 @@ public class BookService {
        return null;
     }
 
-    public List<Book> getBooks(){
-      return br.findAll();
+//    public List<Book> getBooks(){
+//      return br.findAll();
+//    }
+
+    public Page<Book> getBooks(Pageable pageable) {
+        return br.findAll( pageable);
     }
 
     public Book update(int id, Book newBook) {
@@ -54,6 +59,10 @@ if(br.existsById(id)){
 return false;
     }
 
+    public List<Book> getBooksGreaterThan(Double price){
+       return  br.findBookGreaterThan(price);
+    }
+
 
     public List<Book> getBooksByTitle(String title) {
         return br.findByTitle(title);
@@ -65,4 +74,8 @@ return false;
 
     public List<Book> getBooksByWriter(String name) {
         return br.findByWriter_Name(name);
-    }}
+    }
+
+
+
+}
