@@ -8,10 +8,3 @@ for business logic
 
 @Repository
 for Database Connection
-
-Today:
-=> Completed Saving Data with Spring Data JPA
-Tomorrow:
-=> Custom Queries, Paging, and Transactions
-Impediments:
-=> In @OneToMany and @ManyToOne Relation
