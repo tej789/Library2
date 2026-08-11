@@ -1,6 +1,7 @@
 package com.example.library.service;
 
 import com.example.library.model.Book;
+import com.example.library.model.Type;
 import com.example.library.model.Writer;
 import com.example.library.repository.BookRepository;
 import com.example.library.repository.WriterRepository;
@@ -31,6 +32,7 @@ public List<Writer> getWriters(){
 public void addWriterAndBook(){
        Writer writer1 = new Writer(8,"tej2");
        wr.save(writer1);
+
 
        Book book4 = new Book(8,"Book8",writer1,555);
        br.save(book4);

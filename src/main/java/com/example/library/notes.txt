@@ -8,3 +8,19 @@ for business logic
 
 @Repository
 for Database Connection
+
+
+week 3 day 5
+
+here OwnerController.java's matching Repository is OwnerRepository
+
+here first in OwnerController.java we inject OwnerRepository with Constructor injection
+and every time for using OwnerRepository we use OwnerRepository's object owners
+
+
+Today:
+=> Completed Custom Queries, Paging, and Transactions
+Tomorrow:
+=> DTO
+Impediments:
+=> None

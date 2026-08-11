@@ -3,6 +3,8 @@ package com.example.library.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Book {
     @Id
@@ -15,9 +17,17 @@ public class Book {
     @JoinColumn(name = "writer_id")
     private Writer writer;
 
+    @ManyToMany
+    @JoinTable(
+            name = "book_type",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_id")
+    )
+    private List<Type> types;
+
     private double price;
 
-    public Book(int id, String title , Writer writer ,double price) {
+    public Book(int id, String title , Writer writer,double price) {
         this.id = id;
         this.title = title;
         this.writer = writer;
@@ -39,6 +49,8 @@ public class Book {
     public Writer getWriter(){
         return writer;
     }
+
+    public List<Type> getTypes(){return types;}
     public double getPrice(){
         return price;
     }
@@ -53,6 +65,8 @@ public class Book {
     public void setWriter(Writer writer) {
         this.writer = writer;
     }
+
+    public void setTypes(List<Type> types){this.types =types;}
 
     public void setPrice(double price) {
         this.price = price;

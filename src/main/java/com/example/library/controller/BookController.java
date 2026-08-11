@@ -1,6 +1,7 @@
 package com.example.library.controller;
 
 
+import com.example.library.DTO.BookDTO;
 import com.example.library.model.Book;
 import com.example.library.service.BookService;
 import org.springframework.data.domain.Page;
@@ -29,15 +30,25 @@ public class BookController {
         return new ResponseEntity<>(bs.addBook(book), HttpStatus.CREATED);
     }
 
-//    @GetMapping("/book")
-//    public ResponseEntity<List<Book>> getBooks() {
-//        return new ResponseEntity<>(bs.getBooks(), HttpStatus.OK);
-//    }
-
     @GetMapping("/book")
-    public Page<Book> getBooks(Pageable pageable) {
-        return bs.getBooks(pageable);
+    public ResponseEntity<List<Book>> getBooks() {
+        return new ResponseEntity<>(bs.gb(), HttpStatus.OK);
     }
+
+    @GetMapping("/bookPageable")
+    public Page<Book> getBooks(Pageable pageable) {
+        return bs.gb_for_Pageable(pageable);
+    }
+
+
+    @GetMapping("/bookDTO")
+    public BookDTO GB(){
+        Book book =  bs.gb_for_DTO();
+
+        return new BookDTO(book.getTitle(),book.getPrice());
+    }
+
+
 
     @PutMapping("book/{id}")
     public ResponseEntity<?> updateBook(@PathVariable int id,
