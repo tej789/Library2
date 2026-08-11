@@ -18,61 +18,58 @@ public class BookService {
 
     private final BookRepository br;
     private final TypeRepository tr;
- private final Validation v;
+    private final Validation v;
 
-   public BookService(BookRepository br, Validation v,TypeRepository tr){
-       this.br = br;
-       this.v = v;
-       this.tr = tr;
-   }
+    public BookService(BookRepository br, Validation v, TypeRepository tr) {
+        this.br = br;
+        this.v = v;
+        this.tr = tr;
+    }
 //    public Book addBook(Book book){
 //       if(v.check(book)) return      br.save(book);
 //
 //       return null;
 //    }
 
-    public List<Book> gb(){
-       return br.findAll();
+    public List<Book> gb() {
+        return br.findAll();
     }
 
 
     public Page<Book> gb_for_Pageable(Pageable pageable) {
-        return br.findAll( pageable);
+        return br.findAll(pageable);
     }
 
     public Book gb_for_DTO() {
         return br.findById(5).orElseThrow();
     }
+//
+//    public Book update(int id, Book newBook) {
+//
+//        Book book = br.findById(id).orElse(null);
+//
+//        if (book != null) {
+//
+//            book.setTitle(newBook.getTitle());
+//            book.setWriter(newBook.getWriter());
+//            book.setPrice(newBook.getPrice());
+//
+//            return br.save(book);
+//        }
+//
+//        return null;
+//    }
 
-
-    public Book update(int id, Book newBook) {
-
-        Optional<Book> optionalBook = br.findById(id);
-
-        if (optionalBook.isPresent()) {
-            Book book = optionalBook.get();
-
-            book.setTitle(newBook.getTitle());
-            book.setWriter(newBook.getWriter());
-            book.setPrice(newBook.getPrice());
-
-            return br.save(book);
+    public Boolean delete(int id) {
+        if (br.existsById(id)) {
+            br.deleteById(id);
+            return true;
         }
-
-        return null;
+        return false;
     }
 
-
-    public Boolean delete(int id){
-if(br.existsById(id)){
-    br.deleteById(id);
-    return true;
-}
-return false;
-    }
-
-    public List<Book> getBooksGreaterThan(Double price){
-       return  br.findBookGreaterThan(price);
+    public List<Book> getBooksGreaterThan(Double price) {
+        return br.findBookGreaterThan(price);
     }
 
 
@@ -87,6 +84,7 @@ return false;
     public List<Book> getBooksByWriter(String name) {
         return br.findByWriter_Name(name);
     }
+
 
     public Book addBook(Book book) {
 
@@ -105,5 +103,31 @@ return false;
 
         return br.save(book);
     }
+    public Book update(int id, Book newBook) {
 
+        Book book = br.findById(id).orElse(null);
+
+        if (book != null) {
+
+            book.setTitle(newBook.getTitle());
+            book.setWriter(newBook.getWriter());
+            book.setPrice(newBook.getPrice());
+
+            List<Type> types = newBook.getTypes();
+            List<Type> list = new ArrayList<>();
+
+            for (Type type : types) {
+                Type exist = tr.findById(type.getId())
+                        .orElseThrow();
+
+                list.add(exist);
+            }
+
+            book.setTypes(list);
+
+            return br.save(book);
+        }
+
+        return null;
+    }
 }
