@@ -41,13 +41,19 @@ public class BookController {
     }
 
 
+//    @GetMapping("/bookDTO")
+//    public BookDTO GB(){
+//        Book book =  bs.gb_for_DTO();
+//
+//        return new BookDTO(book.getTitle(),book.getPrice());
+//    }
     @GetMapping("/bookDTO")
-    public BookDTO GB(){
-        Book book =  bs.gb_for_DTO();
-
-        return new BookDTO(book.getTitle(),book.getPrice());
+    public List<BookDTO> GB() {
+        return bs.gb_for_DTO()
+                .stream()
+                .map(book -> new BookDTO(book.getTitle(), book.getPrice()))
+                .toList();
     }
-
 
 
     @PutMapping("book/{id}")
@@ -87,6 +93,8 @@ public class BookController {
     public List<Book> getByPrice(@PathVariable Double price) {
         return bs.getBooksByPrice(price);
     }
+
+
 
     @GetMapping("/book/writer/{name}")
     public List<Book> getByWriter(@PathVariable String name) {

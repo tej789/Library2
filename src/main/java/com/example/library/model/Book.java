@@ -1,7 +1,8 @@
 package com.example.library.model;
 
-
+import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.List;
 
@@ -10,12 +11,17 @@ public class Book {
     @Id
     private int id;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
+    @NotNull
     private String title;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "writer_id")
     private Writer writer;
+
+
+
+
 
     @ManyToMany
     @JoinTable(

@@ -37,8 +37,7 @@ public class BookService_List {
     public boolean update(int id,Book book)
     {
         if(!v.check(book)){
-            return false;
-        }
+            return false;}
         for(int i =0;i<books.size();i++)
         {
           if(books.get(i).getId() == id){
@@ -50,6 +49,7 @@ public class BookService_List {
     }
 
     public Boolean delete(int id){
+
         for(int i = 0;i<books.size();i++){
             if(books.get(i).getId()==id){
                 books.remove(i);

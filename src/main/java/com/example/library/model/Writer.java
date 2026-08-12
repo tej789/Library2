@@ -12,8 +12,7 @@ public class Writer {
     private String name;
 
     @OneToMany(
-            mappedBy = "writer",
-            cascade = CascadeType.ALL,
+            mappedBy = "writer", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @JsonIgnore

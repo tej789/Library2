@@ -28,13 +28,22 @@ public List<Writer> getWriters(){
        return wr.findAll();
 }
 
+//public Writer gw_DTO(){
+//       return wr.findById(4).orElseThrow();
+//}
+
+
+    public List<Writer> gw_DTO(){
+       return wr.findAll();
+    }
+
 @Transactional
 public void addWriterAndBook(){
-       Writer writer1 = new Writer(8,"tej2");
+       Writer writer1 = new Writer(10,"tej10");
        wr.save(writer1);
 
 
-       Book book4 = new Book(8,"Book8",writer1,555);
+       Book book4 = new Book(12,null,writer1,444);
        br.save(book4);
 
 

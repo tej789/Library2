@@ -14,6 +14,10 @@ public interface BookRepository extends JpaRepository<Book,Integer>{
 
         List<Book> findByPrice(Double price);
 
+
+
+
+
     List<Book> findByWriter_Name(String name);
 
     @Query("select b from Book b where b.price > :price")

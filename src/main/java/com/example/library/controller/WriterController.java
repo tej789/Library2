@@ -1,7 +1,9 @@
 package com.example.library.controller;
 
+import com.example.library.DTO.WriterDTO;
 import com.example.library.model.Writer;
 import com.example.library.service.WriterService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,7 @@ public class WriterController {
     }
 
     @PostMapping("/writer")
-    public ResponseEntity<Writer> addWriter(@RequestBody Writer writer){
+    public ResponseEntity<Writer> addWriter(@Valid @RequestBody Writer writer){
 
         Writer savedWriter = ws.addWriter(writer);
 
@@ -34,11 +36,27 @@ public class WriterController {
         List<Writer> w = ws.getWriters();
         return new ResponseEntity<>(w,HttpStatus.OK);
     }
+//
+//    @GetMapping("/writerDTO")
+//    public WriterDTO GW(){
+//        Writer writer = ws.gw_DTO();
+//  return new WriterDTO(writer.getName());
+//    }
+
+    @GetMapping("writerDTO")
+    public List<WriterDTO> GW(){
+        return ws.gw_DTO()
+                .stream()
+                .map( writer -> new WriterDTO(writer.getName()))
+                .toList();
+    }
+
 
     @PostMapping("writer/addWriterAndBook")
     public String addWriterBook(){
         ws.addWriterAndBook();
         return "Saved";
     }
+
 
 }

@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class BookService {
@@ -31,20 +31,8 @@ public class BookService {
 //       return null;
 //    }
 
-    public List<Book> gb() {
-        return br.findAll();
-    }
 
-
-    public Page<Book> gb_for_Pageable(Pageable pageable) {
-        return br.findAll(pageable);
-    }
-
-    public Book gb_for_DTO() {
-        return br.findById(5).orElseThrow();
-    }
-//
-//    public Book update(int id, Book newBook) {
+    //    public Book update(int id, Book newBook) {
 //
 //        Book book = br.findById(id).orElse(null);
 //
@@ -59,6 +47,23 @@ public class BookService {
 //
 //        return null;
 //    }
+    public List<Book> gb() {
+        return br.findAll();
+    }
+
+
+    public Page<Book> gb_for_Pageable(Pageable pageable) {
+        return br.findAll(pageable);
+    }
+
+//    public Book gb_for_DTO() {
+//        return br.findById(5).orElseThrow();
+//    }
+
+
+    public List<Book>  gb_for_DTO() {
+        return br.findAll();
+    }
 
     public Boolean delete(int id) {
         if (br.existsById(id)) {
