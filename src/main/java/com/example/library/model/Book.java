@@ -2,7 +2,8 @@ package com.example.library.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.validation.constraints.Positive;
+
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class Book {
     private int id;
 
 //    @Column(nullable = false)
-    @NotNull
+ @NotBlank
     private String title;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -31,6 +32,7 @@ public class Book {
     )
     private List<Type> types;
 
+    @Positive
     private double price;
 
     public Book(int id, String title , Writer writer,double price) {

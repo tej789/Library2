@@ -47,7 +47,7 @@ public class WriterController {
     public List<WriterDTO> GW(){
         return ws.gw_DTO()
                 .stream()
-                .map( writer -> new WriterDTO(writer.getName()))
+                .map( WriterDTO::new)
                 .toList();
     }
 

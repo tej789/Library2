@@ -2,13 +2,18 @@ package com.example.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
 @Entity
 public class Writer {
+
     @Id
     private int id;
+
+    @Size(min = 1 ,max = 30)
     private String name;
 
     @OneToMany(
