@@ -18,3 +18,9 @@ here first in OwnerController.java we inject OwnerRepository with Constructor in
 and every time for using OwnerRepository we use OwnerRepository's object owners
 
 
+Today:
+=> Completed Records as DTOs,Read Real Code Section and Added one @ManyToMany Relationship
+Tomorrow:
+=> DTOs and Validation
+Impediments:
+=> in @ManyToMany Relationship
