@@ -19,15 +19,9 @@ and every time for using OwnerRepository we use OwnerRepository's object owners
 
 
 Today:
-=> Completed Records as DTOs,Read Real Code Section and Added one @ManyToMany Relationship
+=> DTOs and Some Validation implemented
 Tomorrow:
-=> DTOs and Validation
+=> Handling Errors Cleanly
 Impediments:
-=> in @ManyToMany Relationship
+=> in MapStruct
 
-
- .map(book -> new BookDTO(book.getTitle(), book.getPrice()))
-here we apply operation in book through map and then we manually give title and price
-to the BookDTO
-
-MapStruct is use when we more Fields in class

@@ -102,7 +102,6 @@ public class BookService {
 
     public Book addBook(Book book) {
 
-
         List<Type> types = book.getTypes();
         List<Type> list = new ArrayList<>();
 

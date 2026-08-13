@@ -2,6 +2,7 @@ package com.example.library.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.example.library.Exception.Response;
@@ -18,12 +19,30 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(NoSuchElementException.class)
-    public Response BookNotInDB( NoSuchElementException e) {
+    public ResponseEntity<Response> BookNotInDB(
+            NoSuchElementException ex) {
 
-        return (new Response("Book Not Found", e.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new Response("Book Not Found", ex.getMessage()));
     }
 
+   @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Response> InvalidBook(
+            IllegalArgumentException e
+    ){
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new Response("Invalid Book",e.getMessage()));
+    }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+   public ResponseEntity<Response>  InvalidJSON(
+    MethodArgumentNotValidException e
+   ){
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new Response("Invalid JSON Data",e.getMessage()));
+    }
 
 }
 
