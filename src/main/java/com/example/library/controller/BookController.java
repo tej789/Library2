@@ -27,12 +27,17 @@ public class BookController {
         if(x==null){
             return new ResponseEntity<>("Invalid Book",HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(bs.addBook(book), HttpStatus.CREATED);
+        return new ResponseEntity<>(x, HttpStatus.CREATED);
     }
 
     @GetMapping("/book")
     public ResponseEntity<List<Book>> getBooks() {
         return new ResponseEntity<>(bs.gb(), HttpStatus.OK);
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "hello";
     }
 
     @GetMapping("/bookPageable")
@@ -41,20 +46,20 @@ public class BookController {
     }
 
 
-//    @GetMapping("/bookDTO")
-//    public BookDTO GB(){
-//        Book book =  bs.gb_for_DTO();
-//
-//        return new BookDTO(book.getTitle(),book.getPrice());
-//    }
     @GetMapping("/bookDTO")
-    public List<BookDTO> GB() {
-        return bs.gb_for_DTO()
-                .stream()
-                .map(book -> new BookDTO(book.getTitle(), book.getPrice()))
-                .toList();
-    }
+    public BookDTO GB(){
+        Book book =  bs.gb_for_DTO();
 
+        return new BookDTO(book.getTitle(),book.getPrice());
+    }
+//    @GetMapping("/bookDTO")
+//    public List<BookDTO> GB() {
+//        return bs.gb_for_DTO()
+//                .stream()
+//                .map(book -> new BookDTO(book.getTitle(), book.getPrice()))
+//                .toList();
+//    }
+//
 
     @PutMapping("book/{id}")
     public ResponseEntity<?> updateBook(@PathVariable int id,

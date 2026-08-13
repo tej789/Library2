@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @Service
@@ -56,14 +57,14 @@ public class BookService {
         return br.findAll(pageable);
     }
 
-//    public Book gb_for_DTO() {
-//        return br.findById(5).orElseThrow();
-//    }
-
-
-    public List<Book>  gb_for_DTO() {
-        return br.findAll();
+    public Book gb_for_DTO() {
+        return br.findById(103).orElseThrow();
     }
+
+
+//    public List<Book>  gb_for_DTO() {
+//        return br.findAll();
+//    }
 
     public Boolean delete(int id) {
         if (br.existsById(id)) {
@@ -78,8 +79,16 @@ public class BookService {
     }
 
 
+//    public List<Book> getBooksByTitle(String title) {
+//        return br.findByTitle(title);
+//    }
+
     public List<Book> getBooksByTitle(String title) {
-        return br.findByTitle(title);
+        List<Book> book = br.findByTitle(title);
+        if (book.isEmpty()) {
+            throw new NoSuchElementException("No book found with this title");
+        }
+        return book;
     }
 
     public List<Book> getBooksByPrice(double price) {

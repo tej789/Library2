@@ -24,3 +24,10 @@ Tomorrow:
 => DTOs and Validation
 Impediments:
 => in @ManyToMany Relationship
+
+
+ .map(book -> new BookDTO(book.getTitle(), book.getPrice()))
+here we apply operation in book through map and then we manually give title and price
+to the BookDTO
+
+MapStruct is use when we more Fields in class

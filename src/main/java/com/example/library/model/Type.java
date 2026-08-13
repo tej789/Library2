@@ -53,3 +53,7 @@ public class Type {
 
 
 }
+
+// so to implement @ControllerAdvice and @ExceptionHandler i have to create new package Exception
+// and then i have to one GlobalException file then we have to add this @ControllerAdvice and @ExceptionHandler
+// correct mw if i am wrong
