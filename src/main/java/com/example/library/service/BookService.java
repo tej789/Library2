@@ -5,15 +5,17 @@ import com.example.library.model.Book;
 import com.example.library.model.Type;
 import com.example.library.repository.BookRepository;
 import com.example.library.repository.TypeRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-
+@Slf4j
 @Service
 public class BookService {
 
@@ -49,6 +51,8 @@ public class BookService {
 //        return null;
 //    }
     public List<Book> gb() {
+
+
         return br.findAll();
     }
 
@@ -100,14 +104,16 @@ public class BookService {
     }
 
 
-    public Book addBook(Book book) {
-
+    public Book addBook(Book book) throws Exception {
+        if (book.getTitle() == null) {
+            throw new IllegalArgumentException("Title is null");
+        }
         List<Type> types = book.getTypes();
         List<Type> list = new ArrayList<>();
 
         for (Type type : types) {
             Type exist = tr.findById(type.getId())
-                    .orElseThrow();
+                    .orElseThrow(()-> new Exception("Correct the type"));
 
             list.add(exist);
         }

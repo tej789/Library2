@@ -19,9 +19,9 @@ and every time for using OwnerRepository we use OwnerRepository's object owners
 
 
 Today:
-=> DTOs and Some Validation implemented
+=> Added Global Exception Handler , DTOs and Validation
 Tomorrow:
-=> Handling Errors Cleanly
+=> SLF4J and JWT
 Impediments:
-=> in MapStruct
+=> None
 

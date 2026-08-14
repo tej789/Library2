@@ -32,7 +32,7 @@ public class Book {
     )
     private List<Type> types;
 
-    @Positive
+    @Positive()
     private double price;
 
     public Book(int id, String title , Writer writer,double price) {

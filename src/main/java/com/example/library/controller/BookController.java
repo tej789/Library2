@@ -1,16 +1,19 @@
 package com.example.library.controller;
 
-
 import com.example.library.DTO.BookDTO;
 import com.example.library.model.Book;
 import com.example.library.service.BookService;
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
 
+@Slf4j
 @RestController
 public class BookController {
 
@@ -21,7 +24,7 @@ public class BookController {
     }
 
     @PostMapping("/book")
-    public ResponseEntity<?> addBook(@RequestBody Book book) {
+    public ResponseEntity<?> addBook(@Valid @RequestBody Book book) throws Exception {
 
         Book x =bs.addBook(book);
         if(x==null){
@@ -32,13 +35,11 @@ public class BookController {
 
     @GetMapping("/book")
     public ResponseEntity<List<Book>> getBooks() {
+
+        log.info("All books");
         return new ResponseEntity<>(bs.gb(), HttpStatus.OK);
     }
 
-    @GetMapping("/test")
-    public String test(){
-        return "hello";
-    }
 
     @GetMapping("/bookPageable")
     public Page<Book> getBooks(Pageable pageable) {
@@ -89,6 +90,8 @@ public class BookController {
     {
         return bs.getBooksGreaterThan(price);
     }
+
+
     @GetMapping("/book/title/{title}")
     public List<Book> getByTitle(@PathVariable String title) {
         return bs.getBooksByTitle(title);
