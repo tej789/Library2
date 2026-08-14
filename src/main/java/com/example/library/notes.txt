@@ -17,11 +17,3 @@ here OwnerController.java's matching Repository is OwnerRepository
 here first in OwnerController.java we inject OwnerRepository with Constructor injection
 and every time for using OwnerRepository we use OwnerRepository's object owners
 
-
-Today:
-=> Added Global Exception Handler , DTOs and Validation
-Tomorrow:
-=> SLF4J and JWT
-Impediments:
-=> None
-
