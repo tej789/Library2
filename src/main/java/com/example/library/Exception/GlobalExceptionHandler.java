@@ -26,9 +26,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Response> BookNotInDB(
             NoSuchElementException e) {
 
-          log.error("Book Not Found error :{}",e.getMessage());
+          log.error("Not Found error :{}",e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new Response("Book Not Found", e.getMessage()));
+                .body(new Response("Not Found", e.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -48,7 +48,6 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(new Response("Invallid Book", e.getMessage()));
+                .body(new Response("Invallid Data", e.getMessage()));
     }
 }
-// currently i have this models , is this ok but i have a doubt for whom i should do login
