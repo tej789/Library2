@@ -2,6 +2,7 @@ package com.example.library.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 
@@ -12,8 +13,8 @@ public class Book {
     @Id
     private int id;
 
-//    @Column(nullable = false)
- @NotBlank
+    @NotNull
+    @Column(nullable = false)
     private String title;
 
     @ManyToOne(fetch = FetchType.EAGER)

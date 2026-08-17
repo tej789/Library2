@@ -41,7 +41,7 @@ public class WriterController {
 //    public WriterDTO GW(){
 //        Writer writer = ws.gw_DTO();
 //  return new WriterDTO(writer.getName());
-//    }
+//    }'
 
     @GetMapping("writerDTO")
     public List<WriterDTO> GW(){

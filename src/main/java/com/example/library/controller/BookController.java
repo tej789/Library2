@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,7 @@ public class BookController {
         this.bs = bs;
     }
 
+    @PreAuthorize("hasRole('WRITER')")
     @PostMapping("/book")
     public ResponseEntity<?> addBook(@Valid @RequestBody Book book) throws Exception {
 
@@ -33,6 +35,8 @@ public class BookController {
         return new ResponseEntity<>(x, HttpStatus.CREATED);
     }
 
+
+    @PreAuthorize("hasAnyRole('WRITER', 'user')")
     @GetMapping("/book")
     public ResponseEntity<List<Book>> getBooks() {
 
@@ -40,13 +44,13 @@ public class BookController {
         return new ResponseEntity<>(bs.gb(), HttpStatus.OK);
     }
 
-
+    @PreAuthorize("hasAnyRole('WRITER', 'user')")
     @GetMapping("/bookPageable")
     public Page<Book> getBooks(Pageable pageable) {
         return bs.gb_for_Pageable(pageable);
     }
 
-
+    @PreAuthorize("hasAnyRole('WRITER', 'user')")
     @GetMapping("/bookDTO")
     public BookDTO GB(){
         Book book =  bs.gb_for_DTO();

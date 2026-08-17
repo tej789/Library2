@@ -33,7 +33,8 @@ private final UserService us;
  public ResponseEntity<String> login(@RequestBody LoginRequest request){
     User user =  us.login(request);
 
-    String token =  js.generateToken(user.getUsername());
+//    String token =  js.generateToken(user.getUsername());
+    String token = js.generateToken(user.getUsername(), user.getRole());
      return new ResponseEntity<>(token, HttpStatus.OK);
 
  }
