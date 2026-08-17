@@ -17,9 +17,3 @@ here OwnerController.java's matching Repository is OwnerRepository
 here first in OwnerController.java we inject OwnerRepository with Constructor injection
 and every time for using OwnerRepository we use OwnerRepository's object owners
 
-Today:
-=> Added SLF4J and JWT , learned Roles and Permissions
-Tomorrow:
-=> Roles and Permissions
-Impediments:
-=> in JWT
