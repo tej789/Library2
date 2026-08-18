@@ -35,9 +35,3 @@ in this file we have disabled csrf,
 here requestMatchers to give access of some specific url to some role
 
 
-Today:
-=> Added Roles and Permissions
-Tomorrow:
-=>Pattern Matching for switch
-Impediments:
-=> NONE
