@@ -2,11 +2,14 @@ package com.example.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
 import static org.aspectj.apache.bcel.Constants.types;
 
+@Getter
 @Entity
 public class Type {
 
@@ -27,19 +30,9 @@ public class Type {
         this.id =id;
         this.name = name;
     }
-    public int getId(){
-        return id;
-    }
-    public String getName() {
-        return name;
-    }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Book> getBooks() {
-        return books;
     }
 
     public void setBooks(List<Book> books) {
@@ -53,7 +46,3 @@ public class Type {
 
 
 }
-
-// so to implement @ControllerAdvice and @ExceptionHandler i have to create new package Exception
-// and then i have to one GlobalException file then we have to add this @ControllerAdvice and @ExceptionHandler
-// correct mw if i am wrong

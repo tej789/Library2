@@ -17,3 +17,27 @@ here OwnerController.java's matching Repository is OwnerRepository
 here first in OwnerController.java we inject OwnerRepository with Constructor injection
 and every time for using OwnerRepository we use OwnerRepository's object owners
 
+
+week 4 day5
+spring-security-web-boot-3
+spring-security-modules/spring-security-web-boot-3/src/main/java/com/baeldung/cachecontrol/config/SpringSecurityConfig.java
+
+here first we implement  @Configuration,@EnableWebSecurity,@EnableMethodSecurity
+
+@Configuration   if we not add this so spring will ignore security settings
+@EnableWebSecurity  activate web security feature
+@EnableMethodSecurity  enable method level security like @PreAuthorize
+
+spring-security-web-boot-1
+
+spring-security-modules/spring-security-web-boot-1/src/main/java/com/baeldung/securityfilterchain/configuration/SecurityConfig.java
+in this file we have disabled csrf,
+here requestMatchers to give access of some specific url to some role
+
+
+Today:
+=> Added Roles and Permissions
+Tomorrow:
+=>Pattern Matching for switch
+Impediments:
+=> NONE

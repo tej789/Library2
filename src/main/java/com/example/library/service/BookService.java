@@ -3,8 +3,10 @@ package com.example.library.service;
 import com.example.library.component.Validation;
 import com.example.library.model.Book;
 import com.example.library.model.Type;
+import com.example.library.model.Writer;
 import com.example.library.repository.BookRepository;
 import com.example.library.repository.TypeRepository;
+import com.example.library.repository.WriterRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -22,11 +24,13 @@ public class BookService {
     private final BookRepository br;
     private final TypeRepository tr;
     private final Validation v;
+    private final WriterRepository wr;
 
-    public BookService(BookRepository br, Validation v, TypeRepository tr) {
+    public BookService(BookRepository br, Validation v, TypeRepository tr,WriterRepository wr) {
         this.br = br;
         this.v = v;
         this.tr = tr;
+        this.wr = wr;
     }
 //    public Book addBook(Book book){
 //       if(v.check(book)) return      br.save(book);
@@ -62,7 +66,7 @@ public class BookService {
     }
 
     public Book gb_for_DTO() {
-        return br.findById(103).orElseThrow();
+        return br.findById(12).orElseThrow();
     }
 
 
@@ -95,6 +99,9 @@ public class BookService {
         return book;
     }
 
+
+
+
     public List<Book> getBooksByPrice(double price) {
         return br.findByPrice(price);
     }
@@ -104,10 +111,14 @@ public class BookService {
     }
 
 
-    public Book addBook(Book book) throws Exception {
+    public Book addBook(Book book) throws Exception{
         if (book.getTitle() == null) {
             throw new IllegalArgumentException("Title is null");
         }
+        Writer writer = wr.findById(book.getWriter().getId())
+                .orElseThrow(() -> new NoSuchElementException("Writer not found"));
+
+        book.setWriter(writer);
         List<Type> types = book.getTypes();
         List<Type> list = new ArrayList<>();
 
@@ -122,6 +133,8 @@ public class BookService {
 
         return br.save(book);
     }
+
+
     public Book update(int id, Book newBook) {
 
         Book book = br.findById(id).orElse(null);
@@ -150,3 +163,4 @@ public class BookService {
         return null;
     }
 }
+

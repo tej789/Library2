@@ -44,4 +44,3 @@ public class SecurityConfig {
     }
 }
 
-// @Secured("ROLE_VIEWER") i want to use like this

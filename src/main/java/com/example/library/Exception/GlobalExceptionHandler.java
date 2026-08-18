@@ -11,6 +11,24 @@ import java.util.NoSuchElementException;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+//
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<Response>  handleAllException(Exception e){
+//
+//
+//        return switch (e){
+//            case NoSuchElementException ex -> ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                    .body(new Response("Not Found", ex.getMessage()));
+//
+//            case IllegalArgumentException ex ->
+//                    ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//                            .body(new Response("Invalid Data", ex.getMessage()));
+//
+//            default ->
+//                    ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//                            .body(new Response("Error", e.getMessage()));
+//        };
+//    }
 
 
       @ExceptionHandler(Exception.class)
@@ -31,15 +49,6 @@ public class GlobalExceptionHandler {
                 .body(new Response("Not Found", e.getMessage()));
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public String InvalidValidation(
-            MethodArgumentNotValidException e
-    ) {
-
-          log.warn("Correct the Data fields : {}",e.getMessage());
-        return "Some Field is Invallid";
-
-    }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Response> InvalidBook(
@@ -50,4 +59,16 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new Response("Invallid Data", e.getMessage()));
     }
+
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public String InvalidValidation(
+            MethodArgumentNotValidException e
+    ) {
+
+        log.warn("Correct the Data fields : {}",e.getMessage());
+        return "Some Field is Invallid";
+
+    }
+
 }

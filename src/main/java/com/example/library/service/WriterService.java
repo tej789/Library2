@@ -39,11 +39,11 @@ public List<Writer> getWriters(){
 
 @Transactional
 public void addWriterAndBook(){
-       Writer writer1 = new Writer(11,"tej11");
-       wr.save(writer1);
+       Writer writer17 = new Writer(15,"tej15");
+       wr.save(writer17);
 
 
-       Book book4 = new Book(13,"Bok13",writer1,444);
+       Book book4 = new Book(17,"Book17",writer17,444);
        br.save(book4);
 
 

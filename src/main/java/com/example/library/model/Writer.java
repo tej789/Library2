@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
+
 import java.util.List;
 
 @Entity
@@ -57,5 +58,6 @@ public class Writer {
     public String toString() {
         return "Writer{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
+
 
 }

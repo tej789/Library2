@@ -33,6 +33,7 @@ public class JwtService {
                 .getPayload()
                  .getSubject();
     }
+
     public String extractRole(String token) {
 
         return Jwts.parser()
