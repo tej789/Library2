@@ -6,6 +6,7 @@ import com.example.library.service.WriterService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,7 @@ public class WriterController {
         this.ws = ws;
     }
 
+   @PreAuthorize("hasRole('Admin')")
     @PostMapping("/writer")
     public ResponseEntity<Writer> addWriter(@Valid @RequestBody Writer writer){
 
