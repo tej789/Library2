@@ -54,6 +54,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     );
 
             System.out.println("Authenticated user: " + username + ", Role: " + role +"Authority :"+ authorities);
+
+
             // here we store current  request's authenticated user
             SecurityContextHolder.getContext()
                     .setAuthentication(authentication);

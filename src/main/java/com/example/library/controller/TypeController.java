@@ -4,6 +4,7 @@ import com.example.library.model.Type;
 import com.example.library.service.TypeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class TypeController {
         this.ts =ts;
     }
 
+    @PreAuthorize("hasRole('Admin')")
     @PostMapping("/type")
     public ResponseEntity<Type> addType(@RequestBody Type type){
 

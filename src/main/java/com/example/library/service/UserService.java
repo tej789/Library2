@@ -6,6 +6,7 @@ import com.example.library.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -40,5 +41,13 @@ public class UserService {
             throw new IllegalArgumentException("Invalid password");
         }
         return user;
+    }
+
+    public List<User> getUser(){
+        return ur.findAll();
+    }
+
+    public List<User> getUser_DTO(){
+        return ur.findAll();
     }
 }

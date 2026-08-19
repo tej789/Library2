@@ -36,7 +36,7 @@ public class BookController {
     }
 
 
-    @PreAuthorize("hasAnyRole('WRITER', 'user')")
+    @PreAuthorize("hasAnyRole('WRITER', 'user','ADMIN')")
     @GetMapping("/book")
     public ResponseEntity<List<Book>> getBooks() {
 
@@ -44,19 +44,21 @@ public class BookController {
         return new ResponseEntity<>(bs.gb(), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('WRITER', 'user')")
+    @PreAuthorize("hasAnyRole('WRITER', 'user','ADMIN')")
     @GetMapping("/bookPageable")
     public Page<Book> getBooks(Pageable pageable) {
         return bs.gb_for_Pageable(pageable);
     }
 
-    @PreAuthorize("hasAnyRole('WRITER', 'user')")
+    @PreAuthorize("hasAnyRole('WRITER', 'user','ADMIN')")
     @GetMapping("/bookDTO")
     public BookDTO GB(){
         Book book =  bs.gb_for_DTO();
 
         return new BookDTO(book.getTitle(),book.getPrice());
     }
+
+//    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
 //    @GetMapping("/bookDTO")
 //    public List<BookDTO> GB() {
 //        return bs.gb_for_DTO()
@@ -64,8 +66,10 @@ public class BookController {
 //                .map(book -> new BookDTO(book.getTitle(), book.getPrice()))
 //                .toList();
 //    }
-//
 
+
+
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN')")
     @PutMapping("book/{id}")
     public ResponseEntity<?> updateBook(@PathVariable int id,
                                         @RequestBody Book book) {
@@ -79,6 +83,7 @@ public class BookController {
         return new ResponseEntity<>("Book Not Found", HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN')")
     @DeleteMapping("book/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable int id) {
 
@@ -89,25 +94,27 @@ public class BookController {
         return new ResponseEntity<>("Book Not Found", HttpStatus.BAD_REQUEST);
     }
 
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
     @GetMapping("/book/priceGreaterThan/{price}")
     public List<Book> getBookGT(@PathVariable Double price)
     {
         return bs.getBooksGreaterThan(price);
     }
 
-
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
     @GetMapping("/book/title/{title}")
     public List<Book> getByTitle(@PathVariable String title) {
         return bs.getBooksByTitle(title);
     }
 
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
     @GetMapping("/book/price/{price}")
     public List<Book> getByPrice(@PathVariable Double price) {
         return bs.getBooksByPrice(price);
     }
 
 
-
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
     @GetMapping("/book/writer/{name}")
     public List<Book> getByWriter(@PathVariable String name) {
         return bs.getBooksByWriter(name);
