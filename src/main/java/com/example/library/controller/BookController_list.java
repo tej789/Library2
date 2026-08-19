@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@PreAuthorize("hasAnyRole('WRITER', 'user')")
+@PreAuthorize("hasAnyRole('WRITER', 'user','ADMIN')")
 @RestController
 public class BookController_list {
 private final BookService_List bs;

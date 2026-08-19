@@ -53,7 +53,7 @@ public class WriterController {
                 .toList();
     }
 
-
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
     @PostMapping("writer/addWriterAndBook")
     public String addWriterBook(){
         ws.addWriterAndBook();

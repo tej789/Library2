@@ -65,14 +65,14 @@ public class BookService {
         return br.findAll(pageable);
     }
 
-    public Book gb_for_DTO() {
-        return br.findById(12).orElseThrow();
-    }
-
-
-//    public List<Book>  gb_for_DTO() {
-//        return br.findAll();
+//    public Book gb_for_DTO() {
+//        return br.findById(12).orElseThrow();
 //    }
+
+
+    public List<Book>  gb_for_DTO() {
+        return br.findAll();
+    }
 
     public Boolean delete(int id) {
         if (br.existsById(id)) {
