@@ -28,10 +28,4 @@ public class Borrow {
 //public void setUser(User user){
 //    this.user = user;
 //}
-
-
 }
-
-
-//
-
