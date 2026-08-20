@@ -36,9 +36,3 @@ here requestMatchers to give access of some specific url to some role
 
 
 
-Today:
-=> Added Borrow Feature and learned some topics after review
-Tomorrow:
-=> implement Required Changes
-Impediments:
-=> NONE
