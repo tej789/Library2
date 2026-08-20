@@ -16,7 +16,7 @@ public class TypeController {
         this.ts =ts;
     }
 
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/type")
     public ResponseEntity<Type> addType(@RequestBody Type type){
 

@@ -1,12 +1,13 @@
 package com.example.library.DTO;
 
+import com.example.library.model.Role;
 import com.example.library.model.User;
 import lombok.Getter;
 
 @Getter
 public class UserDTO {
     private String username;
-    private String role;
+    private Role role;
 
     public UserDTO(User user){
         this.username = user.getUsername();

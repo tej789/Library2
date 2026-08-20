@@ -42,14 +42,17 @@ throw new RuntimeException("book Already borrowed");
     }
 
 
-//    public Borrow returnBook(int userId, int bookId) {
-//        List<Borrow> records = br.findByUserIdAndStatus(userId, "BORROWED");
-//
-//        Borrow record = records.stream().filter(b -> b.getBook().getId()).findFirst().get();
-//        record.setStatus("RETURNED");
-//        record.setReturnDate(LocalDate.now());
-//
-//        return br.save(record);
-//    }
+    public Borrow returnBook(int userId, int bookId) {
+        List<Borrow> records = br.findByUserIdAndStatus(userId, "BORROWED");
+
+        Borrow record = records.stream()
+                .filter(b -> b.getBook().getId()==bookId)
+                .findFirst()
+                .get();
+        record.setStatus("RETURNED");
+        record.setReturnDate(LocalDate.now());
+
+        return br.save(record);
+    }
 
 }

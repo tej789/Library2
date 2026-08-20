@@ -44,7 +44,7 @@ public class BookController {
         return new ResponseEntity<>(bs.gb(), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('WRITER', 'user','ADMIN')")
+    @PreAuthorize("hasAnyRole('WRITER','USER','ADMIN')")
     @GetMapping("/bookPageable")
     public Page<Book> getBooks(Pageable pageable) {
         return bs.gb_for_Pageable(pageable);
@@ -58,7 +58,7 @@ public class BookController {
 //        return new BookDTO(book.getTitle(),book.getPrice());
 //    }
 
-    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','USER')")
     @GetMapping("/bookDTO")
     public List<BookDTO> GB() {
         return bs.gb_for_DTO()
@@ -94,27 +94,27 @@ public class BookController {
         return new ResponseEntity<>("Book Not Found", HttpStatus.BAD_REQUEST);
     }
 
-    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','USER')")
     @GetMapping("/book/priceGreaterThan/{price}")
     public List<Book> getBookGT(@PathVariable Double price)
     {
         return bs.getBooksGreaterThan(price);
     }
 
-    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','USER')")
     @GetMapping("/book/title/{title}")
     public List<Book> getByTitle(@PathVariable String title) {
         return bs.getBooksByTitle(title);
     }
 
-    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','USER')")
     @GetMapping("/book/price/{price}")
     public List<Book> getByPrice(@PathVariable Double price) {
         return bs.getBooksByPrice(price);
     }
 
 
-    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','USER')")
     @GetMapping("/book/writer/{name}")
     public List<Book> getByWriter(@PathVariable String name) {
         return bs.getBooksByWriter(name);

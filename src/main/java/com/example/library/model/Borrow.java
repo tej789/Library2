@@ -1,5 +1,6 @@
 package com.example.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,9 +16,11 @@ public class Borrow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
 
     @ManyToOne
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Book book;
 
     private LocalDate borrowDate;
@@ -25,7 +28,11 @@ public class Borrow {
 
     private String status;
 
-//public void setUser(User user){
-//    this.user = user;
-//}
+
 }
+//         this.engine = new GasolineEngine so instead oof this can we writer as
+//       GasolineEngine engine = new GasolineEngine();
+
+
+// so instead can  this.engine = new GasolineEngine ,can we write as  GasolineEngine e = new GasolineEngine();
+//     this.engine = e;

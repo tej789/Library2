@@ -23,7 +23,7 @@ public class WriterController {
         this.ws = ws;
     }
 
-   @PreAuthorize("hasRole('Admin')")
+   @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/writer")
     public ResponseEntity<Writer> addWriter(@Valid @RequestBody Writer writer){
 
@@ -53,7 +53,7 @@ public class WriterController {
                 .toList();
     }
 
-    @PreAuthorize("hasAnyRole('WRITER','ADMIN','user')")
+    @PreAuthorize("hasAnyRole('WRITER','ADMIN','USER')")
     @PostMapping("writer/addWriterAndBook")
     public String addWriterBook(){
         ws.addWriterAndBook();
