@@ -44,13 +44,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             //////////////////////////////////////////////
         // for adding token expiry we need this
-            if (jwtService.isTokenExpired(token)) {
-                // Short-circuit the request and return a structured 401 error
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.setContentType("application/json");
-                response.getWriter().write("{\"error\": \"Unauthorized\", \"message\": \"Token has expired or is invalid\"}");
-                return; // Stop the filter chain execution right here
-            }
+//            if (jwtService.isTokenExpired(token)) {
+//                // Short-circuit the request and return a structured 401 error
+//                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//                response.setContentType("application/json");
+//                response.getWriter().write("{\"error\": \"Unauthorized\", \"message\": \"Token has expired or is invalid\"}");
+//                return; // Stop the filter chain execution right here
+//            }
            ///////////////////////////////////////////////
             String username = jwtService.extractUsername(token);
             String role = jwtService.extractRole(token);
